@@ -2,9 +2,9 @@
 name = "polymarket-rs"
 version = "0.1.0"
 edition = "2021"
-authors = ["Paws Engineer <play.pawsengineer@gmail.com>"]
+authors = ["Pawsengineer <play.pawsengineer@gmail.com>"]
 description = "Rust client library for the Polymarket CLOB API"
-license = "MIT OR Apache-2.0"
+license = "MIT"
 repository = "https://github.com/pawsengineer/polymarket-rs"
 keywords = [
     "polymarket",
