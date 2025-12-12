@@ -12,7 +12,7 @@ pub struct GammaMarketParams {
     pub tag_id: Option<String>,
     pub order: Option<String>,
     pub ascending: Option<bool>,
-    pub start_date_min: Option<String>,
+    pub end_date_min: Option<String>,
 }
 
 impl GammaMarketParams {
@@ -64,8 +64,8 @@ impl GammaMarketParams {
         self
     }
 
-    pub fn with_start_date_min(mut self, date: &DateTime<Utc>) -> Self {
-        self.start_date_min = Some(encode(&date.to_rfc3339()).to_string());
+    pub fn with_end_date_min(mut self, date: &DateTime<Utc>) -> Self {
+        self.end_date_min = Some(encode(&date.to_rfc3339()).to_string());
         self
     }
 
@@ -97,8 +97,8 @@ impl GammaMarketParams {
         if let Some(ascending) = self.ascending {
             params.push(format!("ascending={}", ascending));
         }
-        if let Some(ref date) = self.start_date_min {
-            params.push(format!("start_date_min={}", date));
+        if let Some(ref date) = self.end_date_min {
+            params.push(format!("end_date_min={}", date));
         }
 
         if params.is_empty() {
