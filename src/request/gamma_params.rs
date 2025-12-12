@@ -9,6 +9,7 @@ pub struct GammaMarketParams {
     pub tag_id: Option<String>,
     pub order: Option<String>,
     pub ascending: Option<bool>,
+    pub start_date_min: Option<String>,
 }
 
 impl GammaMarketParams {
@@ -60,6 +61,11 @@ impl GammaMarketParams {
         self
     }
 
+    pub fn with_start_date_min(mut self, date: &str) -> Self {
+        self.start_date_min = Some(date.to_string());
+        self
+    }
+
     /// Convert parameters to query string
     pub fn to_query_string(&self) -> String {
         let mut params = Vec::new();
@@ -88,6 +94,9 @@ impl GammaMarketParams {
         if let Some(ascending) = self.ascending {
             params.push(format!("ascending={}", ascending));
         }
+        if let Some(ref date) = self.start_date_min {
+            params.push(format!("start_date_min={}", date));
+        }
 
         if params.is_empty() {
             String::new()
@@ -109,9 +118,7 @@ mod tests {
 
     #[test]
     fn test_basic_query_string() {
-        let params = GammaMarketParams::new()
-            .with_limit(10)
-            .with_offset(20);
+        let params = GammaMarketParams::new().with_limit(10).with_offset(20);
 
         let query = params.to_query_string();
         assert!(query.contains("limit=10"));
@@ -129,8 +136,7 @@ mod tests {
 
     #[test]
     fn test_ordering() {
-        let params = GammaMarketParams::new()
-            .with_order("volume", false);
+        let params = GammaMarketParams::new().with_order("volume", false);
 
         let query = params.to_query_string();
         assert!(query.contains("order=volume"));
