@@ -1,3 +1,6 @@
+use chrono::{DateTime, Utc};
+use urlencoding::encode;
+
 /// Query parameters for Gamma API market endpoints
 #[derive(Debug, Clone, Default)]
 pub struct GammaMarketParams {
@@ -61,8 +64,8 @@ impl GammaMarketParams {
         self
     }
 
-    pub fn with_start_date_min(mut self, date: &str) -> Self {
-        self.start_date_min = Some(date.to_string());
+    pub fn with_start_date_min(mut self, date: &DateTime<Utc>) -> Self {
+        self.start_date_min = Some(encode(&date.to_rfc3339()).to_string());
         self
     }
 
