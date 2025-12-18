@@ -9,7 +9,7 @@ pub enum AssetType {
 }
 
 /// Order side (BUY or SELL)
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Hash)]
 #[serde(rename_all = "UPPERCASE")]
 pub enum Side {
     #[default]
